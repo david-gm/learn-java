@@ -2,12 +2,28 @@
 
 ## Arrays:
 
+simple array:
 ```java
 // initialization:
 Dog[] allPets;
 allPets = new Dog[7];
 allPets[0] = new Dog();
 allPets[1] = new Dog();
+
+// remove
+allPets[1] = null;
+// runtime error:
+allPets[8] = new Dog();
+```
+ArrayList
+```java
+ArrayList<Dog> allPets = new ArrayList<Dog>();  // no need to set size
+
+// NOTE: array list with capacity of 7; allPets.size() return 0 still!
+ArrayList<Dog> allPets = new ArrayList<Dog>(7);
+allPets.add(new Dog());
+allPets.remove(1); // remove Dog at index 1
+allPets.size();
 ```
 
 

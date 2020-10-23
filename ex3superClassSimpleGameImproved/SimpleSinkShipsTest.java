@@ -1,4 +1,6 @@
-package ex1superClassSimpleGame;
+package ex3superClassSimpleGameImproved;
+
+import java.util.ArrayList;
 
 class SimpleSinkShipsTest {
     public static void main(String[] args) {
@@ -6,7 +8,10 @@ class SimpleSinkShipsTest {
 
         SimpleSinkShips simple_sink = new SimpleSinkShips();
 
-        int[] array = { 2, 3, 4 };
+        ArrayList<Integer> array = new ArrayList<Integer>();
+        array.add(2);
+        array.add(3);
+        array.add(4);
         simple_sink.setArray(array);
 
         boolean okay = true;
