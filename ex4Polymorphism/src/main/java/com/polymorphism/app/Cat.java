@@ -2,9 +2,11 @@ package com.polymorphism.app;
 
 public class Cat extends Animal {
 
-    public void sleep()
-    {
+    /**
+     * sleep method of cat
+     */
+    @Override
+    public void sleep() {
         System.out.println("Cat is sleeping");
     }
-    
 }

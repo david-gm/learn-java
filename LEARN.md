@@ -101,3 +101,8 @@ Cat sleeps
 ```shell
 jar tf jar-file
 ```
+
+- without MANIFEST.MF file, the complete classpath (`-cp`) to the main class has to be provided, e.g.
+```shell
+java -cp ex4Polymorphism-1.0-SNAPSHOT.jar com.polymorphism.app.App
+```

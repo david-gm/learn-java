@@ -69,3 +69,24 @@ mvn package # package source code to JAR
 </build>
 
 ```
+
+## Add javadoc plugin:
+
+```xml
+<build>
+  <plugins>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-javadoc-plugin</artifactId>
+      <version>3.2.0</version>
+      <configuration>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
+```
+execute:
+
+```shell
+ mvn javadoc:javadoc
+ ```
