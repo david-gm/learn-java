@@ -1,6 +1,10 @@
 # VS code
 .vscode
 
+# Maven
+
+target/
+
 # Compiled class file
 *.class
 

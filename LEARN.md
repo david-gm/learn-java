@@ -26,9 +26,13 @@ allPets.remove(1); // remove Dog at index 1
 allPets.size();
 ```
 
+## Casting
 
+```java
+int a = Integer.parseInt("25");
+```
 
-# Classes and Objects:
+## Classes and Objects:
 
 - all Objects are only accessible by their reference:
     ```java
@@ -46,8 +50,54 @@ allPets.size();
     - `==` compares basic data-types and memory adresses of objects
     - `.equals()` compares values of objects
 
-# Casting
+- determine inharitence or membership:
+  - is-a: a dog is a animal: inharitence
+  - has-a: a car has a wheel: member
 
+## Polymorphism:
 ```java
-int a = Integer.parseInt("25");
+class Animal {
+    public void sleep() {
+        System.out.println("Animal sleeps");
+    }
+    public static void main(String[] args) {
+        Animal[] animals = new Animal[2]; // creating array of reference for superclass only
+        animals[0] = new Animal();
+        animals[1] = new Cat();
+        for (Animal a : animals) {
+            a.sleep();  // polymorphism: the "lowest" method found of each object is called
+        }
+    }
+}
+
+class Cat extends Animal {
+    public void sleep() {
+        System.out.println("Cat sleeps");
+    }
+}
+```
+output:
+```
+Animal sleeps
+Cat sleeps
+```
+
+## Access control:
+
+- final class: cannot be inherited from
+- Order: `public -> protected -> default -> private`
+- *public:* 
+  - a subclass inherits all public instance variables and methods
+- *protected:*
+  - subclasses can use, initiate, and use the protected class as a result, even if they are not in the same package.
+- *default:* (no access modifier) only classes in the same package can use the `class ABC`. Others cannot initiate, get the class as a result, or see the `default` class.
+- *private:*
+  - a subclass cannot access instance variables nor methods
+
+
+## JAR
+
+- view content of a JAR file:
+```shell
+jar tf jar-file
 ```
