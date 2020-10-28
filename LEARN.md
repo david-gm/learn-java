@@ -34,6 +34,11 @@ int a = Integer.parseInt("25");
 
 ## Classes and Objects:
 
+- all Objects inherit from the class Object:
+    - hashCode()
+    - equals()
+    - toString()
+    - getClass()
 - all Objects are only accessible by their reference:
     ```java
     ABC new_abc = new ABC()
@@ -82,6 +87,53 @@ Animal sleeps
 Cat sleeps
 ```
 
+## Abstraction 
+
+### Classes
+
+- cannot be instantiated
+
+```java
+abstract public class AbstractClass
+{
+}
+```
+
+### Methods
+
+- if abstract methods are present, the class has to be abstract too
+- you can mix non-abstract and abstract methods in an abstract class
+- abstract methods have no body
+- abstract methods have to be implemented in sub-classes
+
+```java
+public abstract void newMethod();
+```
+
+## Interfaces
+
+- all methods of an interface are abstract by defaul, and the interface itself is public by default
+```java
+public interface MyInterface {
+    public void newMethod();
+    public void anotherMethod();
+}
+```
+
+- interfaces need to be implemented:
+```java
+public class MyClass implements MyInterface {
+    @Override
+    public void newMethod() {
+
+    };
+    @Override
+    public void anotherMethod() {
+
+    };
+}
+```
+
 ## Access control:
 
 - final class: cannot be inherited from
@@ -93,7 +145,6 @@ Cat sleeps
 - *default:* (no access modifier) only classes in the same package can use the `class ABC`. Others cannot initiate, get the class as a result, or see the `default` class.
 - *private:*
   - a subclass cannot access instance variables nor methods
-
 
 ## JAR
 
