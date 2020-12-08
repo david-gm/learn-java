@@ -55,7 +55,7 @@ int a = Integer.parseInt("25");
     - `==` compares basic data-types and memory adresses of objects
     - `.equals()` compares values of objects
 
-- determine inharitence or membership:
+- determine inheritance or membership:
   - is-a: a dog is a animal: inharitence
   - has-a: a car has a wheel: member
 
