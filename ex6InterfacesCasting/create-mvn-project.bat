@@ -1,0 +1,1 @@
+mvn archetype:generate -DgroupId=com.polymorphism.app -DartifactId=ex6InterfaceCasting -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false

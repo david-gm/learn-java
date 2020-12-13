@@ -112,7 +112,9 @@ public abstract void newMethod();
 
 ## Interfaces
 
-- all methods of an interface are abstract by defaul, and the interface itself is public by default
+- the interface is **public** by default
+- all **methods** of an interface are **abstract** by default
+
 ```java
 public interface MyInterface {
     public void newMethod();
