@@ -59,6 +59,30 @@ int a = Integer.parseInt("25");
   - is-a: a dog is a animal: inharitence
   - has-a: a car has a wheel: member
 
+### Constructors
+
+- if no constructor is explicitly declared, the compiler creates a default constructor (with no arguments)
+- if at least one constructor is declared, the no default constructor is created by the compiler
+- if possible, ALWAYS declare a default constructor if you declare a non-default constructor
+- constructors can be overloaded; order and type of arguments matter (see example below)
+- instance variabels get default value if no value is assigned (see above)
+
+```java
+public class Mushroom {
+    public Mushroom() {}
+    public Mushroom(int size) {}
+    public Mushroom(boolean isPoisonous) {}
+    public Mushroom(boolean isPoisonous, int size) {}
+    public Mushroom(int size, boolean isPoisonous) {}
+}
+```
+#### Constructors and Superclasses
+
+- all constructors of all possible super classes get called, before the own constructor gets called
+  - this is also true for abstract classes; they cannot hold instance variables, non-the less they might execute some code in the constructor
+- if `super()` needs to get called explicitly, it needs to be the first instruction in the constructor - otherwise the code does not compile
+- if no `super()` is declared, the compiler inserts a `super()` itself
+
 ## Polymorphism:
 ```java
 class Animal {
@@ -159,3 +183,9 @@ jar tf jar-file
 ```shell
 java -cp ex4Polymorphism-1.0-SNAPSHOT.jar com.polymorphism.app.App
 ```
+
+## Stack and Heap
+
+- Heap: objects and their instance variables are living in the heap
+  - reference variables of objects live in the stack, the corresponding referenced objectes is still constructed in the heap and lives in the heap
+- Stack: method calls and local variables live in the stack
