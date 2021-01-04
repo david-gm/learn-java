@@ -1,6 +1,6 @@
 package com.interfaces.app.animals;
 
-public class Dog extends Animal {
+public class Dog implements Animal {
     @Override
     public String getType() { return "Dog"; }
 }
