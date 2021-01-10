@@ -1,6 +1,6 @@
 # JAVA
 
-## Arrays:
+## Arrays
 
 simple array:
 ```java
@@ -15,6 +15,7 @@ allPets[1] = null;
 // runtime error:
 allPets[8] = new Dog();
 ```
+
 ArrayList
 ```java
 ArrayList<Dog> allPets = new ArrayList<Dog>();  // no need to set size
@@ -24,6 +25,10 @@ ArrayList<Dog> allPets = new ArrayList<Dog>(7);
 allPets.add(new Dog());
 allPets.remove(1); // remove Dog at index 1
 allPets.size();
+
+for (Dog dog : dogs) {
+    System.out.println(dog.toString());
+}
 ```
 
 ## Casting
@@ -32,7 +37,7 @@ allPets.size();
 int a = Integer.parseInt("25");
 ```
 
-## Classes and Objects:
+## Classes and Objects
 
 - all Objects inherit from the class Object:
     - hashCode()
@@ -76,12 +81,57 @@ public class Mushroom {
     public Mushroom(int size, boolean isPoisonous) {}
 }
 ```
-#### Constructors and Superclasses
+### Constructors and Superclasses
 
 - all constructors of all possible super classes get called, before the own constructor gets called
   - this is also true for abstract classes; they cannot hold instance variables, non-the less they might execute some code in the constructor
 - if `super()` needs to get called explicitly, it needs to be the first instruction in the constructor - otherwise the code does not compile
 - if no `super()` is declared, the compiler inserts a `super()` itself
+
+### Static members and methods
+
+Static members are the same for each instance of the class. Their are used by each instance of the class and there exists only one instance of the variable in the program. The static variable is instanciated the first time the class is either instanciated or the classed is used by calling a static method.
+
+```java
+public class Cat {
+    private static int amount = 0;
+
+    public Cat() {
+        amount ++;
+    }
+}
+```
+
+Static methods should only be called with their class name (not with an instance):
+```java
+public class A {
+    public static void print(String msg) {
+        System.out.println("printing: " + msg);
+    }
+}
+
+// called in main
+public class Main {
+    public static void main() {
+        A a = new A();
+        a.print("abc"); // considered bad practice, at is is misleading, what the method is
+        A.print("abc"); // common pratice
+    }
+}
+```
+### Final (constants)
+
+A variable declared `final`cannot be changed after intialization.
+
+```java
+public static final double PI = 3.14159265;
+```
+
+`final` can be used to:
+- a `final` method cannot be overwritten
+- a `final` variable cannot be changed
+- a `final` parameter cannot be changed
+- a `final` class cannot be extended; no classes can inherit from this class
 
 ## Polymorphism:
 ```java
@@ -160,7 +210,66 @@ public class MyClass implements MyInterface {
 }
 ```
 
-## Access control:
+## Primitive Wrappers and Autoboxing
+
+For each primitive type, a wrapper class is available:
+
+| Type    | Wrapper Type |
+|---------|--------------|
+| boolean | Boolean      |
+| char    | Character    |
+| byte    | Byte         |
+| short   | Short        |
+| int     | Integer      |
+| long    | Long         |
+| float   | Float        |
+| double  | Double       |
+
+Wrapping a primitive type:
+```java
+int i = 288;
+Integer iI = new Integer(i); // wrapping NOTE: deprecated conversion: slow
+Integer iINew = Integer.valueOf(i); // wrapping 
+int i_new = iINew.intValue(); // unwrapping
+```
+
+**Autoboxing**: conversion from primitive type to Wrapper-Object is automatically applied.
+
+For example, an `ArrayList` object can only be instanciated with actual References, not with primitive types (`ArrayList<int>` is not allowed):
+
+```java
+//ArrayList<int> abc = new ArrayList<int>(); // Not allowed!
+ArrayList<Integer> abc = new ArrayList<Integer>();
+
+abc.add(1); // int 1 is automatically converted to Integer (Autoboxing)
+abc.add(2);
+abc.add(3);
+
+for (int iLoop : abc) { // Unboxing Integer to int
+    System.out.println(String.format("in loop: %d", iLoop));
+}
+```
+Other examples:
+- method arguments: `void num(Integer i) {}`
+- return values: `int num() { Integer x = new Integer(1); return x; }`
+- operations on numbers: `Integer a = new Integer(3) + 2;`
+- assignment: `x = 1; Double d = x;`
+
+## Static Imports
+
+- whenever you use static clases, static variables or enumarations, you can import them and type less:
+
+```java
+import sttaic java.lang.System.out;
+
+class WithStatic {
+    public static void main(String [] args) {
+        out.println("test");
+    }
+}
+```
+
+## Access control
 
 - final class: cannot be inherited from
 - Order: `public -> protected -> default -> private`
