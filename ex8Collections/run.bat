@@ -1,0 +1,1 @@
+java -cp out com.collections.Collections

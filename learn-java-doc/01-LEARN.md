@@ -255,6 +255,14 @@ Other examples:
 - operations on numbers: `Integer a = new Integer(3) + 2;`
 - assignment: `x = 1; Double d = x;`
 
+## Collections
+
+- ArrayList is basically a C++ vector
+- TreeSet is similar to a C++ set (order of insert is kept)
+- HashMap is a C++ map
+- LinkedList is for faster insert and deletion of elements in the middle of the collection
+- HashSet is a C++ set
+
 ## Static Imports
 
 - whenever you use static clases, static variables or enumarations, you can import them and type less:
