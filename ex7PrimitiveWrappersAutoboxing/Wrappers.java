@@ -18,8 +18,18 @@ public class Wrappers {
         abc.add(2);
         abc.add(3);
 
-        for (int iLoop : abc) {
-            System.out.println(String.format("in loop: %d", iLoop));
+        for (var iLoop : abc) {
+            System.out.println(String.format("in loop: %d [%s]", iLoop, iLoop.getClass().toString()));
         }
+
+        for (int iLoop: abc) {
+            System.out.println(String.format("[%s]", typeof(iLoop)));
+            System.out.println(String.format("[%s]", ((Object)iLoop).getClass().toString())); // Autoboxing with cast int to Object -> Integer
+        }
+    }
+
+    public static Class<Integer> typeof(final int val)
+    {
+        return Integer.TYPE;
     }
 }
