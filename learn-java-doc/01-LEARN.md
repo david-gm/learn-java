@@ -263,6 +263,42 @@ Other examples:
 - LinkedList is for faster insert and deletion of elements in the middle of the collection
 - HashSet is a C++ set
 
+### Sort Collectibles
+
+To sort an Array List: `Collectibles.sort(List list)` can be called. 
+Prerequisite:
+- The class, which is in the `ArrayList<AnyClass>` needs to implement the `Compareable` interface and overrite the `compareTo` method
+```java
+class Song implements Comparable<Song> {
+    String title;
+    String artist;
+    String rating;
+    String length;
+
+    Song(String title, String artist, String rating, String length) {
+        this.title = title;
+        this.artist = artist;
+        this.rating = rating;
+        this.length = length;
+    }
+
+    public String toString() {
+        return title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public int compareTo(Song s) {
+        return title.compareTo(s.getTitle());
+    }
+```
+- OR: we user the second method pattern of `Collectibles.sort`: `Collectibles.sort​(List<T> list, Comparator<? super T> c)`; we need to provide a comperator:
+```java
+
+```
+
 ## Static Imports
 
 - whenever you use static clases, static variables or enumarations, you can import them and type less:
