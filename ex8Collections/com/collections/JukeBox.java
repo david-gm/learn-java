@@ -30,11 +30,11 @@ public class JukeBox {
         for(Song s : songsComperatorLam)
             System.out.println(s);
 
-        // System.out.println("Songs as HashSet (needs Compareable interface and methods
-        // equals() and hashCode()");
-        // HashSet<Song> songsSet = new HashSet<Song>();
-        // songsSet.addAll(songs);
-        // System.out.println(songsSet);
+        System.out.println("Songs as HashSet methods equals() and hashCode() to get uniques");
+        HashSet<Song> songsSet = new HashSet<Song>();
+        songsSet.addAll(songs);
+        for(Song s : songsSet)
+            System.out.println(s);
     }
 
     private void readFile() {
@@ -45,9 +45,9 @@ public class JukeBox {
             while((line = bufferedReader.readLine()) !=  null)
                 addSong(line);
 
-            Collections.sort(songs);
-            Collections.sort(songsComperator, Song.Comperators.ARTIST);
-            Collections.sort(songsComperatorLam, Song.ComparatorsLambda.TITLE);
+            // Collections.sort(songs);
+            // Collections.sort(songsComperator, Song.Comperators.ARTIST);
+            // Collections.sort(songsComperatorLam, Song.ComparatorsLambda.TITLE);
 
             bufferedReader.close();
         } catch (Exception e) {
@@ -65,7 +65,7 @@ public class JukeBox {
 
 }
 
-class Song implements Comparable<Song> {
+class Song /**implements Comparable<Song>**/ {
     private String title;
     private String artist;
     private String rating;
@@ -97,25 +97,25 @@ class Song implements Comparable<Song> {
         return artist;
     }
 
-    public int compareTo(Song s) {
-        return title.compareTo(s.getTitle());
-    }
+    // public int compareTo(Song s) {
+    //     return title.compareTo(s.getTitle());
+    // }
 
-    public static class Comperators {
-        public static final Comparator<Song> TITLE = new Comparator<Song>() {
-            @Override
-            public int compare(Song o1, Song o2) {
-                return o1.title.compareTo(o2.title);
-            }
-        };
+    // public static class Comperators {
+    //     public static final Comparator<Song> TITLE = new Comparator<Song>() {
+    //         @Override
+    //         public int compare(Song o1, Song o2) {
+    //             return o1.title.compareTo(o2.title);
+    //         }
+    //     };
 
-        public static final Comparator<Song> ARTIST = new Comparator<Song>() {
-            @Override
-            public int compare(Song o1, Song o2) {
-                return o1.artist.compareTo(o2.artist);
-            }
-        };
-    }
+    //     public static final Comparator<Song> ARTIST = new Comparator<Song>() {
+    //         @Override
+    //         public int compare(Song o1, Song o2) {
+    //             return o1.artist.compareTo(o2.artist);
+    //         }
+    //     };
+    // }
 
     // using Comparator inner classes and lambdas (Java 8)
     public static class ComparatorsLambda {
@@ -123,12 +123,12 @@ class Song implements Comparable<Song> {
         public static final Comparator<Song> ARTIST = (Song o1, Song o2) -> o1.artist.compareTo(o2.artist);
     }
 
-    // public boolean equals(Object song) {
-    // Song s = (Song) song;
-    // return s.getTitle().equals(title);
-    // }
+    public boolean equals(Object song) {
+        Song s = (Song) song;
+        return s.getTitle().equals(title);
+    }
 
-    // public int hashCode() {
-    // return title.hashCode();
-    // }
+    public int hashCode() {
+        return title.hashCode();
+    }
 }

@@ -3,6 +3,7 @@
 ## Arrays
 
 simple array:
+
 ```java
 // initialization:
 Dog[] allPets;
@@ -17,6 +18,7 @@ allPets[8] = new Dog();
 ```
 
 ArrayList
+
 ```java
 ArrayList<Dog> allPets = new ArrayList<Dog>();  // no need to set size
 
@@ -40,25 +42,26 @@ int a = Integer.parseInt("25");
 ## Classes and Objects
 
 - all Objects inherit from the class Object:
-    - hashCode()
-    - equals()
-    - toString()
-    - getClass()
+  - hashCode()
+  - equals()
+  - toString()
+  - getClass()
 - all Objects are only accessible by their reference:
-    ```java
-    ABC new_abc = new ABC()
-    ```
-    new_abc is only reference to object
+  ```java
+  ABC new_abc = new ABC()
+  ```
+  new_abc is only reference to object
 - in principle: method parameters are pass by value (only base data-types)
 - Instance variables:
-    - if not initialized, they get a default value assigned:
-        - integers and chars: 0
-        - floats: 0.0
-        - booleans: false
-        - references: null
+  - if not initialized, they get a default value assigned:
+    - integers and chars: 0
+    - floats: 0.0
+    - booleans: false
+    - references: null
 - Comparing objects:
-    - `==` compares basic data-types and memory adresses of objects
-    - `.equals()` compares values of objects
+
+  - `==` compares basic data-types and memory adresses of objects
+  - `.equals()` compares values of objects
 
 - determine inheritance or membership:
   - is-a: a dog is a animal: inharitence
@@ -81,6 +84,7 @@ public class Mushroom {
     public Mushroom(int size, boolean isPoisonous) {}
 }
 ```
+
 ### Constructors and Superclasses
 
 - all constructors of all possible super classes get called, before the own constructor gets called
@@ -103,6 +107,7 @@ public class Cat {
 ```
 
 Static methods should only be called with their class name (not with an instance):
+
 ```java
 public class A {
     public static void print(String msg) {
@@ -119,6 +124,7 @@ public class Main {
     }
 }
 ```
+
 ### Final (constants)
 
 A variable declared `final`cannot be changed after intialization.
@@ -128,12 +134,14 @@ public static final double PI = 3.14159265;
 ```
 
 `final` can be used to:
+
 - a `final` method cannot be overwritten
 - a `final` variable cannot be changed
 - a `final` parameter cannot be changed
 - a `final` class cannot be extended; no classes can inherit from this class
 
 ## Polymorphism:
+
 ```java
 class Animal {
     public void sleep() {
@@ -155,13 +163,15 @@ class Cat extends Animal {
     }
 }
 ```
+
 output:
+
 ```
 Animal sleeps
 Cat sleeps
 ```
 
-## Abstraction 
+## Abstraction
 
 ### Classes
 
@@ -197,6 +207,7 @@ public interface MyInterface {
 ```
 
 - interfaces need to be implemented:
+
 ```java
 public class MyClass implements MyInterface {
     @Override
@@ -215,7 +226,7 @@ public class MyClass implements MyInterface {
 For each primitive type, a wrapper class is available:
 
 | Type    | Wrapper Type |
-|---------|--------------|
+| ------- | ------------ |
 | boolean | Boolean      |
 | char    | Character    |
 | byte    | Byte         |
@@ -226,10 +237,11 @@ For each primitive type, a wrapper class is available:
 | double  | Double       |
 
 Wrapping a primitive type:
+
 ```java
 int i = 288;
 Integer iI = new Integer(i); // wrapping NOTE: deprecated conversion: slow
-Integer iINew = Integer.valueOf(i); // wrapping 
+Integer iINew = Integer.valueOf(i); // wrapping
 int i_new = iINew.intValue(); // unwrapping
 ```
 
@@ -249,7 +261,9 @@ for (int iLoop : abc) { // Unboxing Integer to int
     System.out.println(String.format("in loop: %d", iLoop));
 }
 ```
+
 Other examples:
+
 - method arguments: `void num(Integer i) {}`
 - return values: `int num() { Integer x = new Integer(1); return x; }`
 - operations on numbers: `Integer a = new Integer(3) + 2;`
@@ -265,9 +279,13 @@ Other examples:
 
 ### Sort Collectibles
 
-To sort an Array List: `Collectibles.sort(List list)` can be called. 
+#### ArrayList
+
+To sort an Array List: `Collectibles.sort(List list)` can be called.
 Prerequisite:
+
 - The class, which is in the `ArrayList<AnyClass>` needs to implement the `Compareable` interface and overrite the `compareTo` method
+
 ```java
 class Song implements Comparable<Song> {
     String title;
@@ -294,17 +312,192 @@ class Song implements Comparable<Song> {
         return title.compareTo(s.getTitle());
     }
 ```
+
 - OR: we user the second method pattern of `Collectibles.sort`: `Collectibles.sort​(List<T> list, Comparator<? super T> c)`; we need to provide a comperator:
+
 ```java
 
+ArrayList<Song> songsComperator = new ArrayList<Song>();
+ArrayList<Song> songsComperatorLam = new ArrayList<Song>();
+// add songs to array list
+// ...
+
+// sort with Comperators:
+Collections.sort(songsComperator, Song.Comperators.ARTIST);
+Collections.sort(songsComperatorLam, Song.ComparatorsLambda.TITLE);
+
+public class Song {
+    // ...
+
+    public static class Comperators {
+        public static final Comparator<Song> TITLE = new Comparator<Song>() {
+            @Override
+            public int compare(Song o1, Song o2) {
+                return o1.title.compareTo(o2.title);
+            }
+        };
+
+        public static final Comparator<Song> ARTIST = new Comparator<Song>() {
+            @Override
+            public int compare(Song o1, Song o2) {
+                return o1.artist.compareTo(o2.artist);
+            }
+        };
+    }
+
+    // using Comparator inner classes and lambdas (Java 8)
+    public static class ComparatorsLambda {
+        public static final Comparator<Song> TITLE = (Song o1, Song o2) -> o1.title.compareTo(o2.title);
+        public static final Comparator<Song> ARTIST = (Song o1, Song o2) -> o1.artist.compareTo(o2.artist);
+    }
+```
+
+#### HashSet
+
+The set requires the methods `boolean equals(Object other)` and `int hashCode()` to exist. They proof, if the members of two objects are equal, and if the object-refenrences point to the same object (hashCode comparison).
+
+We need to override the hashCode method, otherwise, two Objects will never be "same", as they have a different HashCode.
+
+General Contracts for hashCode() in Java
+
+1. If two objects are equal by the equals() method then their hashcode returned by the hashCode() method must be the same.
+
+2. Whenever the hashCode() method is invoked on the same object more than once within a single execution of the application, hashCode() must return the same integer provided no information or fields used in equals and hashcode is modified. This integer is not required to be the same during multiple executions of application though.
+
+3. If two objects are not equaled by the equals() method it is not required that their hashcode must be different. Though it’s always good practice to return different hashCode for unequal object. Different hashCode for a distinct objects can improve the performance of hashmap or hashtable by reducing collision.
+
+> Note: Things to remember while overriding hashcode in Java
+>
+> 1. Whenever you override the equals method, hashcode should be overridden to be in compliance with equals hashcode contract.
+> 2. If you don't override hashCode() method properly your Object may not function correctly on hash-based collection e.g. HashMap, Hashtable or HashSet.
+
+> Note: IntelliJ and Eclipse offer auto-generation for hashCode() and equals()
+
+```java
+ArrayList<Song> songs = new ArrayList<Song>();
+// add songs to array list
+// ...
+
+// create HashSet from ArrayList:
+HashSet<Song> songsSet = new HashSet<Song>();
+songsSet.addAll(songs);
+
+class Song {
+    private String title;
+    private String artist;
+    private String rating;
+    private String length;
+
+    Song(String title, String artist, String rating, String length) {
+        this.title = title;
+        this.artist = artist;
+        this.rating = rating;
+        this.length = length;
+    }
+
+    public boolean equals(Object song) {
+        Song s = (Song) song;
+        return s.getTitle().equals(title);
+    }
+
+    public int hashCode() {
+        return title.hashCode();
+    }
+}
+```
+
+## Generics as method arguments
+
+The problem:
+using polymorphism with normal arrays throws an ArrayStoreException when inserting a Class that is not a sub-type of the refernece variable. This is only checked at runtime.
+
+```java
+public class TestGenerics {
+    public static void main(String[] args) {
+        new TestGenerics().run();
+    }
+    public void run() {
+        Pet[] pets = {new Dog(), new Cat(), new Dog()};
+        Dog[] dogs = {new Dog(), new Dog(), new Dog()};
+        takePets(pets);
+        takePets(dogs);
+    }
+    public void takePets(Pet[] pets) {
+        for(Pet p : pets)
+            p.eat();
+        pets[0] = new Cat(); // raises java.lang.ArrayStoreException for array dogs (reference type is Dog[]!
+    }
+}
+abstract class Pet {
+    void eat() {
+        System.out.println("Pet eats");
+    }
+}
+class Dog extends Pet {
+    void bark() {}
+}
+class Cat extends Pet {
+    void miau() {}
+}
+```
+
+The same example with ArrayList will not compile:
+
+```java
+import java.util.ArrayList;
+
+public class TestGenericsArrayList {
+   public static void main(String[] args) {
+       new TestGenericsArrayList().run();
+   }
+   public void run() {
+       ArrayList<Dog> dogs = new ArrayList<Dog>();
+       dogs.add(new Dog());
+       takePets(dogs);
+   }
+   public void takePets(ArrayList<Pet> pets) {
+       for(Pet p : pets)
+           p.eat();
+       pets.add(new Cat()); // fails to compile
+   }
+}
+abstract class Pet {
+   void eat() {
+       System.out.println("Pet eats");
+   }
+}
+class Dog extends Pet {
+   void bark() {}
+}
+class Cat extends Pet {
+   void miau() {}
+}
+```
+
+So how to solve this? How to create a method `takePets()` that takes a Pet or their descendant classes?
+
+_Solution:_ use Wildcards or `<T extends ParentClassOrInterface>`. `extend` can be applied to Classes and Interfaces here.
+
+> Note: the Wildcard (or T extends X syntax) prevents the ArrayList to be altered, since we are not allowed to add Cats to a Dog ArrayList. But polymorphism for methods only accessing and not altering data works.
+
+```java
+public void takePet(ArrayList<? extends Pet> pets) {
+   for(Pet p : pets)
+           p.eat();
+}
+// or
+public <T extends Pet> void takePet(ArrayList<T> pets) {
+   for(Pet p : pets)
+           p.eat();
+}
 ```
 
 ## Static Imports
 
-- whenever you use static clases, static variables or enumarations, you can import them and type less:
+- whenever you use static classes, static variables or enumarations, you can import them and type less:
 
 ```java
-import sttaic java.lang.System.out;
+import static java.lang.System.out;
 
 class WithStatic {
     public static void main(String [] args) {
@@ -317,22 +510,31 @@ class WithStatic {
 
 - final class: cannot be inherited from
 - Order: `public -> protected -> default -> private`
-- *public:* 
+- _public:_
   - a subclass inherits all public instance variables and methods
-- *protected:*
+- _protected:_
   - subclasses can use, initiate, and use the protected class as a result, even if they are not in the same package.
-- *default:* (no access modifier) only classes in the same package can use the `class ABC`. Others cannot initiate, get the class as a result, or see the `default` class.
-- *private:*
+- _default:_ (no access modifier) only classes in the same package can use the `class ABC`. Others cannot initiate, get the class as a result, or see the `default` class.
+- _private:_
   - a subclass cannot access instance variables nor methods
+
+| Access Modifier | within class | within package | outside package by subclass only | outside package |
+| --------------- | ------------ | -------------- | -------------------------------- | --------------- |
+| Private         | Y            | N              | N                                | N               |
+| Default         | Y            | Y              | N                                | N               |
+| Protected       | Y            | Y              | Y                                | N               |
+| Public          | Y            | Y              | Y                                | Y               |
 
 ## JAR
 
 - view content of a JAR file:
+
 ```shell
 jar tf jar-file
 ```
 
 - without MANIFEST.MF file, the complete classpath (`-cp`) to the main class has to be provided, e.g.
+
 ```shell
 java -cp ex4Polymorphism-1.0-SNAPSHOT.jar com.polymorphism.app.App
 ```
