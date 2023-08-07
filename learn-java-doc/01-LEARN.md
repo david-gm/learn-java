@@ -284,7 +284,9 @@ Other examples:
 To sort an Array List: `Collectibles.sort(List list)` can be called.
 Prerequisite:
 
-- The class, which is in the `ArrayList<AnyClass>` needs to implement the `Compareable` interface and overrite the `compareTo` method
+- The class, which is in the `ArrayList<AnyClass>` needs to implement the `Compareable` interface and overrite the `compareTo` method.
+
+> Note: the disadvantage is, that the list can then only be sorted by the method provided by the overriden method `compareTo()`.
 
 ```java
 class Song implements Comparable<Song> {

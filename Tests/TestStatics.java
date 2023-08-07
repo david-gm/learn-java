@@ -1,4 +1,4 @@
-public class Tests {
+public class TestStatics {
     private static void testStatic() {
         System.out.println("abc");
     }
